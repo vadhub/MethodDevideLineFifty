@@ -1,9 +1,11 @@
-package com.vad.methoddevidelinefifty;
+package com.vad.methoddevidelinefifty.screens.main;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.widget.EditText;
+
+import com.vad.methoddevidelinefifty.R;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -21,7 +23,5 @@ public class MainActivity extends AppCompatActivity {
         editTextA = (EditText) findViewById(R.id.editTextNumberA);
         editTextB = (EditText) findViewById(R.id.editTextNumberB);
         editTextEpsilon = (EditText) findViewById(R.id.editTextNumberEpsilon);
-
-
     }
 }
