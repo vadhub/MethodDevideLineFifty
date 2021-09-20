@@ -2,16 +2,25 @@ package com.vad.methoddevidelinefifty.tools.parsemathexpression;
 
 public class Lexeme {
     LexemeType lexemeType;
-    String value;
+    double value;
+    String title;
 
-    public Lexeme(LexemeType lexemeType, String value) {
+    public Lexeme(LexemeType lexemeType, Character title) {
         this.lexemeType = lexemeType;
-        this.value = value;
+        value = Double.NaN;
+        this.title = title.toString();
     }
 
-    public Lexeme(LexemeType lexemeType, Character value) {
+    public Lexeme(LexemeType lexemeType, String title) {
         this.lexemeType = lexemeType;
-        this.value = value.toString();
+        this.value = Double.NaN;
+        this.title = title;
+    }
+
+    public Lexeme(LexemeType lexemeType, Double value) {
+        this.lexemeType = lexemeType;
+        this.value = value;
+        this.title = String.valueOf(value);
     }
 
     @Override
