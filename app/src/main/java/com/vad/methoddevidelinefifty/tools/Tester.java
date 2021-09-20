@@ -1,16 +1,24 @@
 package com.vad.methoddevidelinefifty.tools;
 
+import com.vad.methoddevidelinefifty.tools.parsemathexpression.Lexeme;
+import com.vad.methoddevidelinefifty.tools.parsemathexpression.ParseFunctions;
+
 import java.util.HashMap;
+import java.util.List;
 
 public class Tester {
     public static void main(String[] args) {
-        String expression = "1*3/(-2)";
-        Tester tester = new Tester();
-        try {
-            System.out.println(getFraction(tester.parse(expression), 0.01));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        String expression = "1 + (2 +  x +  4 * 3 ) / 2";
+
+        ParseFunctions parseFunctions = new ParseFunctions();
+        List<Lexeme> lexemes = parseFunctions.lexAnalise(expression);
+        System.out.println(lexemes);
+//        Tester tester = new Tester();
+//        try {
+//            System.out.println(getFraction(tester.parse(expression), 0.01));
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }
 
     private HashMap<String, Double> variables;
@@ -63,6 +71,7 @@ public class Tester {
             if (!r.rest.isEmpty() && r.rest.charAt(0) == ')') {
                 r.rest = r.rest.substring(1);
             } else {
+                System.out.println(r.rest);
                 System.err.println("Error: not close bracket");
             }
             return r;
@@ -121,7 +130,7 @@ public class Tester {
         // число также может начинаться с минуса
         if(s.charAt(0) == '-'){
             negative = true;
-            s = s.substring( 1 );
+            s = s.substring(1);
         }
         // разрешаем только цифры и точку
         while (i < s.length() && (Character.isDigit(s.charAt(i)) || s.charAt(i) == '.')) {
@@ -150,6 +159,15 @@ public class Tester {
             return new Result(Math.cos(Math.toRadians(r.acc)), r.rest);
         } else if (func.equals("tan")) {
             return new Result(Math.tan(Math.toRadians(r.acc)), r.rest);
+        } else if (func.equals("pow")) {
+            int pow = 0;
+            for(int i = 0; i < r.rest.length(); i++){
+                if(r.rest.charAt(i)==','){
+                    pow = Character.getNumericValue(r.rest.charAt(i+1));
+                    r.rest=r.rest.substring(3);
+                }
+            }
+            return new Result(Math.pow(r.acc, pow), r.rest);
         } else {
             System.err.println("function '" + func + "' is not defined");
         }
