@@ -31,47 +31,67 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@+id/editTextFunction"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/editTextFunction">
 
         <EditText
             android:id="@+id/editTextNumberA"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="15sp"
-            android:hint="a"
-            android:gravity="center"
             android:layout_weight="1"
             android:ems="3"
-            android:inputType="number" />
+            android:gravity="center"
+            android:hint="a"
+            android:inputType="number"
+            android:textSize="15sp" />
 
         <EditText
             android:id="@+id/editTextNumberB"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textSize="15sp"
-            android:hint="b"
-            android:gravity="center"
             android:ems="3"
+            android:gravity="center"
+            android:hint="b"
             android:inputType="number"
-             />
+            android:textSize="15sp" />
 
         <EditText
             android:id="@+id/editTextNumberEpsilon"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textSize="15sp"
-            android:hint="epsilon"
-            android:gravity="center"
             android:ems="3"
+            android:gravity="center"
+            android:hint="epsilon"
             android:inputType="number"
-            />
+            android:textSize="15sp" />
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="calc"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:onClick="calculate"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+    <TextView
+        android:id="@+id/textViewResult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button" />
 </androidx.constraintlayout.widget.ConstraintLayout>

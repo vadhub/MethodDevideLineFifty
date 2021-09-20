@@ -64,7 +64,7 @@ public class ParseFunctions {
 //        return lexemes;
 //    }
 
-    public void recurse(final String expression) {
+    public double recurse(final String expression) {
         //implement
         List<Lexeme> tokens = new ArrayList<>();
         int countOperation = lexAnalise(tokens, expression);
@@ -73,9 +73,11 @@ public class ParseFunctions {
         LexemeBuffer tokenList = new LexemeBuffer(tokens);
         double result = Math.round(expression(tokenList) * 100) / 100.0;
         if (result % 1.0 == 0.0)
-            System.out.println((long)result + " " + countOperation);
+            System.out.println((long)result);
         else
-            System.out.println(result + " " + countOperation);
+            System.out.println(result);
+
+        return result;
     }
 
     public static int lexAnalise(List<Lexeme> lexemes, String expression) {
@@ -265,6 +267,14 @@ public class ParseFunctions {
                 return value;
             default:
                 throw new RuntimeException("Unexpected token: " + token.title + " at position " + tokenList.getPos());
+        }
+    }
+
+    public String getFraction(double val, double ratio) {
+        for (int i = 1;; i++) {
+            double tem = val / (1D / i);
+            if (Math.abs(tem - Math.round(tem)) < ratio)
+                return Math.round(tem) + "/" + i;
         }
     }
 
