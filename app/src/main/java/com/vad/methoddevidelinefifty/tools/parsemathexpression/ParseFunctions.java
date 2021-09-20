@@ -63,4 +63,13 @@ public class ParseFunctions {
         lexemes.add(new Lexeme(LexemeType.EOF, ""));
         return lexemes;
     }
+
+    // Грамматика:
+    // expression : add_sub EOF
+    // add_sub : mul_div ( ( '+' | '-' ) mul_div )*
+    // mul_div : pow ( ( '*' | '/' ) pow )*
+    // pow : primary ( '^' primary )*
+    // primary : NUM | '-' pow | ( '(' | 'cos(' | 'sin(' | 'tan(' ) add_sub ')'
+
+
 }
