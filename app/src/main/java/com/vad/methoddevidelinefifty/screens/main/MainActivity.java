@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements ViewMain{
     }
 
     public void calculate(View view) {
-        String expression = editTextFunction.getText().toString().trim().toLowerCase().replace("x", editTextA.getText().toString());
+        String expression = editTextFunction.getText().toString().trim().toLowerCase();
         presenter.calculateFunction(expression);
     }
 

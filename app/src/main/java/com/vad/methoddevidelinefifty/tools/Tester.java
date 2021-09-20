@@ -1,17 +1,22 @@
 package com.vad.methoddevidelinefifty.tools;
 
+import com.vad.methoddevidelinefifty.methods.methoddevidebylinefifty.DividingLineHalf;
 import com.vad.methoddevidelinefifty.tools.parsemathexpression.ParseFunctions;
 
 import java.util.HashMap;
 
 public class Tester {
     public static void main(String[] args) {
-        String expression = "2^2*x^2";
+        String expression = "x^2 - 2*x -1";
         int newChar = 3;
-
-        expression = expression.replace("x", newChar+"");
-        ParseFunctions parseFunctions = new ParseFunctions();
-        parseFunctions.recurse(expression);
+        DividingLineHalf dividingLineHalf = new DividingLineHalf(0 , -1, 2, 0.5F, expression);
+        double a = 113/4d;
+        double b = 13/2d;
+        System.out.println(a> b);
+        System.out.println(dividingLineHalf.divideOfLineHalf(-1, 2, 0.5f, expression));
+//        expression = expression.replace("x", newChar+"");
+//        ParseFunctions parseFunctions = new ParseFunctions();
+//        parseFunctions.recurse(expression);
 
 //        Tester tester = new Tester();
 //        try {
