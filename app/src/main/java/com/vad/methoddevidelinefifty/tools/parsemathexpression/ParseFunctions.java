@@ -64,10 +64,10 @@ public class ParseFunctions {
 //        return lexemes;
 //    }
 
-    public void recurse(final String expression, int countOperation) {
+    public void recurse(final String expression) {
         //implement
         List<Lexeme> tokens = new ArrayList<>();
-        countOperation = lexAnalise(tokens, expression);
+        int countOperation = lexAnalise(tokens, expression);
 
         // получение и вывод результата
         LexemeBuffer tokenList = new LexemeBuffer(tokens);
@@ -147,7 +147,7 @@ public class ParseFunctions {
                             value += (expr[i] - '0') * factor;                  // добавление десятичной позиции
                         }
                     }
-                    lexemes.add(new Lexeme(LexemeType.NUMBER, expr[i]));
+                    lexemes.add(new Lexeme(LexemeType.NUMBER, value));
                     break;
                 default:
                     if (i + 3 < expr.length &&

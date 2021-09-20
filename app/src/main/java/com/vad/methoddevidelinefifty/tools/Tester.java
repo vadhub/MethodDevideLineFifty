@@ -1,18 +1,18 @@
 package com.vad.methoddevidelinefifty.tools;
 
-import com.vad.methoddevidelinefifty.tools.parsemathexpression.Lexeme;
 import com.vad.methoddevidelinefifty.tools.parsemathexpression.ParseFunctions;
 
 import java.util.HashMap;
-import java.util.List;
 
 public class Tester {
     public static void main(String[] args) {
-        String expression = "1 + (2 +  x +  4 * 3 ) / 2";
+        String expression = "2^2*x^2";
+        int newChar = 3;
 
+        expression = expression.replace("x", newChar+"");
         ParseFunctions parseFunctions = new ParseFunctions();
-        List<Lexeme> lexemes = parseFunctions.lexAnalise(expression);
-        System.out.println(lexemes);
+        parseFunctions.recurse(expression);
+
 //        Tester tester = new Tester();
 //        try {
 //            System.out.println(getFraction(tester.parse(expression), 0.01));
