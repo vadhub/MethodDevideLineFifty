@@ -107,24 +107,17 @@ public class DividingLineHalf {
             expres = expression.replace("x", zk+"");
             fFromZk = (float) parseFunctions.recurse(expres);
 
-            System.out.println(
-                    k+" "+
-                    "ak "+parseFunctions.getFraction(ak, 0.01)+" "+
-                    "bk "+parseFunctions.getFraction(bk, 0.01)+" "+
-                    "f(yk) "+parseFunctions.getFraction(fFromYk, 0.01)+" "+
-                    "xck "+parseFunctions.getFraction(xck,0.01)+" "+
-                    "f(xck) "+parseFunctions.getFraction(fFromXck, 0.01)+" "+
-                    "yk  "+parseFunctions.getFraction(yk, 0.01)+" "+
-                    "zk "+parseFunctions.getFraction(zk,0.01)+" "+
-                    "f(zk) "+parseFunctions.getFraction(fFromZk, 0.01)+" "+
-                    "l "+parseFunctions.getFraction(l, 0.01)
-                    );
+            expres = expression.replace("x", xck+"");
+            fFromXck = (float) parseFunctions.recurse(expres);
             //step5
             if(fFromYk<fFromXck){
                 bk = xck;
                 xck = yk;
+
             } else {
                 //step 6
+                expres = expression.replace("x", xck+"");
+                fFromXck = (float) parseFunctions.recurse(expres);
                 if(fFromZk<fFromXck){
                     ak = xck;
                     xck = zk;
