@@ -8,12 +8,9 @@ import java.util.HashMap;
 public class Tester {
     public static void main(String[] args) {
         String expression = "x^2 - 2*x -1";
-        int newChar = 3;
-        DividingLineHalf dividingLineHalf = new DividingLineHalf(0 , -1, 2, 0.5F, expression);
-        double a = 113/4d;
-        double b = 13/2d;
-        System.out.println(a> b);
-        System.out.println(dividingLineHalf.divideOfLineHalf(-1, 2, 0.5f, expression));
+        DividingLineHalf dividingLineHalf = new DividingLineHalf();
+
+        System.out.println(getFraction(dividingLineHalf.divideOfLineHalf(-1, 2, 0.5f, expression), 0.01));
 //        expression = expression.replace("x", newChar+"");
 //        ParseFunctions parseFunctions = new ParseFunctions();
 //        parseFunctions.recurse(expression);

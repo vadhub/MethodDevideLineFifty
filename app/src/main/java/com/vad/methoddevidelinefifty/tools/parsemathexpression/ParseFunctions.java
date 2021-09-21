@@ -72,10 +72,6 @@ public class ParseFunctions {
         // получение и вывод результата
         LexemeBuffer tokenList = new LexemeBuffer(tokens);
         double result = Math.round(expression(tokenList) * 100) / 100.0;
-        if (result % 1.0 == 0.0)
-            System.out.println((long)result);
-        else
-            System.out.println(result);
 
         return result;
     }
