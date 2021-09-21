@@ -75,26 +75,26 @@ public class DividingLineHalf {
 //        return 0;
 //    }
 
-    public float divideOfLineHalf(float a, float b, float eps, String expression){
+    public double divideOfLineHalf(double a, double b, double eps, String expression){
         //step 1
-        float ak = a;
-        float bk = b;
+        double ak = a;
+        double bk = b;
 
         //step 2
         int k = 0;
 
         //step 3
-        float xck = (ak + bk)/2;
-        float l = bk - ak;
+        double xck = (ak + bk)/2;
+        double l = bk - ak;
 
         String expres = expression.replace("x", xck+"");
-        float fFromXck = (float) parseFunctions.recurse(expres);
+        double fFromXck = parseFunctions.recurse(expres);
         System.out.println(fFromXck+" "+xck);
 
-        float yk = 0;
-        float zk = 0;
-        float fFromZk = 0;
-        float fFromYk = 0;
+        double yk = 0;
+        double zk = 0;
+        double fFromZk = 0;
+        double fFromYk = 0;
 
         while(true){
             //step4
@@ -102,25 +102,32 @@ public class DividingLineHalf {
             zk = bk - l/4;
 
             expres = expression.replace("x", yk+"");
-            fFromYk = (float) parseFunctions.recurse(expres);
+            fFromYk = parseFunctions.recurse(expres);
 
             expres = expression.replace("x", zk+"");
-            fFromZk = (float) parseFunctions.recurse(expres);
+            fFromZk = parseFunctions.recurse(expres);
 
             expres = expression.replace("x", xck+"");
-            fFromXck = (float) parseFunctions.recurse(expres);
+            fFromXck = parseFunctions.recurse(expres);
+
+            System.out.println(zk +" "+ fFromZk);
+            System.out.println("start "+k +" xck: "+parseFunctions.getFraction(xck, 0.01) +"  y "+parseFunctions.getFraction(yk, 0.01));
             //step5
             if(fFromYk<fFromXck){
                 bk = xck;
                 xck = yk;
+                System.out.println("step5 "+k +parseFunctions.getFraction(xck, 0.01) +"  y "+parseFunctions.getFraction(yk, 0.01));
 
             } else {
                 //step 6
                 expres = expression.replace("x", xck+"");
-                fFromXck = (float) parseFunctions.recurse(expres);
+                fFromXck = parseFunctions.recurse(expres);
+
+                System.out.println("step6 "+k +"  fxck "+fFromXck+"  y "+fFromZk);
                 if(fFromZk<fFromXck){
                     ak = xck;
                     xck = zk;
+                    System.out.println("step6 cond "+k+parseFunctions.getFraction(xck, 0.01) +"  y "+parseFunctions.getFraction(yk, 0.01));
                 }else{
                     ak = yk;
                     bk = zk;
@@ -129,12 +136,15 @@ public class DividingLineHalf {
 
             //step 7
             l = bk  - ak;
+            System.out.println(l +" "+ak+" "+bk);
             if(l<eps){
-                System.out.println(k +" "+ xck);
+                System.out.println("endd "+k+parseFunctions.getFraction(xck, 0.01) +"  y "+parseFunctions.getFraction(yk, 0.01));
                 return xck;
             }else{
                 k++;
             }
+
+            System.out.println("end "+k +" xck: "+parseFunctions.getFraction(xck, 0.01) +"  y "+parseFunctions.getFraction(yk, 0.01));
 
 //            System.out.println(
 //                    k+" "+

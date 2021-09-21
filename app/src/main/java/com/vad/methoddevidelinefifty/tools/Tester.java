@@ -12,8 +12,8 @@ public class Tester {
 
         System.out.println(getFraction(dividingLineHalf.divideOfLineHalf(-1, 2, 0.5f, expression), 0.01));
 //        expression = expression.replace("x", newChar+"");
-//        ParseFunctions parseFunctions = new ParseFunctions();
-//        parseFunctions.recurse(expression);
+        ParseFunctions parseFunctions = new ParseFunctions();
+        System.out.println(parseFunctions.recurse("0.875^2 - 0.875*2 -1"));
 
 //        Tester tester = new Tester();
 //        try {
