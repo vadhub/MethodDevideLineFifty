@@ -33,8 +33,8 @@ public class ParseFunctions {
                     lexemes.add(new Lexeme(LexemeType.OP_DIV, c));
                     pos++;
                     continue;
-                case '^':
-                    lexemes.add(new Lexeme(LexemeType.OP_POW, c));
+                case ',':
+                    lexemes.add(new Lexeme(LexemeType.COMMA, c));
                     pos++;
                     continue;
                 case '(':
@@ -66,8 +66,20 @@ public class ParseFunctions {
                         lexemes.add(new Lexeme(LexemeType.NUMBER, sb.toString()));
                     }else{
                         if (c != ' ') {
-                            System.out.println("so");
-                            break;
+                            if ( c >= 'a' && c <= 'z'
+                                    || c >= 'A' && c <= 'Z') {
+                                StringBuilder sb = new StringBuilder();
+                                do {
+                                    sb.append(c);
+                                    pos++;
+                                    if (pos >= expression.length()) {
+                                        break;
+                                    }
+                                    c = expression.charAt(pos);
+                                } while (c >= 'a' && c <= 'z'
+                                        || c >= 'A' && c <= 'Z');
+                                lexemes.add(new Lexeme(LexemeType.NUMBER, sb.toString()));
+                            }
                         }
                         pos++;
                     }
