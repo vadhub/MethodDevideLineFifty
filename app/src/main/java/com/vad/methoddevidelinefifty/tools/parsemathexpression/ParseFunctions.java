@@ -64,115 +64,82 @@ public class ParseFunctions {
 //        return lexemes;
 //    }
 
-    public double recurse(final String expression) {
-        //implement
-        List<Lexeme> tokens = new ArrayList<>();
-        int countOperation = lexAnalise(tokens, expression);
+//    public double recurse(final String expression) {
+//        //implement
+//        List<Lexeme> tokens = new ArrayList<>();
+//        int countOperation = lexAnalise(tokens, expression);
+//
+//        // получение и вывод результата
+//        LexemeBuffer tokenList = new LexemeBuffer(tokens);
+//        double result = Math.round(expression(tokenList) * 100) / 100.0;
+//
+//        return result;
+//    }
 
-        // получение и вывод результата
-        LexemeBuffer tokenList = new LexemeBuffer(tokens);
-        double result = Math.round(expression(tokenList) * 100) / 100.0;
-
-        return result;
-    }
-
-    public static int lexAnalise(List<Lexeme> lexemes, String expression) {
-        int countOperation = 0;
-
-        char[] expr = expression.toCharArray();
-        int i = 0;
-        while (i < expr.length) {
-            switch (expr[i]) {
-                case ' ':
-                    i++;
-                    break;
+    public static List<Lexeme> lexAnalise(String expression) {
+        List<Lexeme> lexemes = new ArrayList<>();
+        int pos = 0;
+        while (pos < expression.length()) {
+            char c = expression.charAt(pos);
+            switch (c) {
                 case '+':
-                    lexemes.add(new Lexeme(LexemeType.OP_PLUS, expr[i]));
-                    i++;
-                    countOperation++;
-                    break;
+                    lexemes.add(new Lexeme(LexemeType.OP_PLUS, c));
+                    pos++;
+                    continue;
                 case '-':
-                    lexemes.add(new Lexeme(LexemeType.OP_MINUS, expr[i]));
-                    i++;
-                    countOperation++;
-                    break;
+                    lexemes.add(new Lexeme(LexemeType.OP_MINUS, c));
+                    pos++;
+                    continue;
                 case '*':
-                    lexemes.add(new Lexeme(LexemeType.OP_MUL, expr[i]));
-                    i++;
-                    countOperation++;
-                    break;
+                    lexemes.add(new Lexeme(LexemeType.OP_MUL, c));
+                    pos++;
+                    continue;
                 case '/':
-                    lexemes.add(new Lexeme(LexemeType.OP_DIV, expr[i]));
-                    i++;
-                    countOperation++;
-                    break;
+                    lexemes.add(new Lexeme(LexemeType.OP_DIV, c));
+                    pos++;
+                    continue;
                 case '^':
-                    lexemes.add(new Lexeme(LexemeType.OP_POW, expr[i]));
-                    i++;
-                    countOperation++;
-                    break;
+                    lexemes.add(new Lexeme(LexemeType.OP_POW, c));
+                    pos++;
+                    continue;
                 case '(':
-                    lexemes.add(new Lexeme(LexemeType.LEFT_BRACKET, expr[i]));
-                    i++;
-                    break;
+                    lexemes.add(new Lexeme(LexemeType.LEFT_BRACKET, c));
+                    pos++;
+                    continue;
                 case ')':
-                    lexemes.add(new Lexeme(LexemeType.RIGHT_BRACKET, expr[i]));
-                    i++;
-                    break;
-                case '.':
-                case '0':
-                case '1':
-                case '2':
-                case '3':
-                case '4':
-                case '5':
-                case '6':
-                case '7':
-                case '8':
-                case '9':
-                    if (expr[i] == '.' &&                                       // если первый символ десятичный разделитель и
-                            (i + 1 >= expr.length ||                            // это последний символ выражения или
-                                    expr[i + 1] < '0' || expr[i + 1] > '9'))    // следующий символ не цифра
-                        throw new RuntimeException("Unexpected character: " + expr[i] + " at position " + i);
-                    double value = 0.0;
-                    for (; i < expr.length && expr[i] >= '0' && expr[i] <= '9'; i++)
-                        value = 10 * value + (expr[i] - '0');                   // накопление целой части
-                    if (i < expr.length && expr[i] == '.') {
-                        i++;
-                        double factor = 1.0;                                    // множитель для десятичных разрядов
-                        for (; i < expr.length && expr[i] >= '0' && expr[i] <= '9'; i++) {
-                            factor *= 0.1;                                      // уменьшение множителя в 10 раз
-                            value += (expr[i] - '0') * factor;                  // добавление десятичной позиции
-                        }
-                    }
-                    lexemes.add(new Lexeme(LexemeType.NUMBER, value));
-                    break;
+                    lexemes.add(new Lexeme(LexemeType.RIGHT_BRACKET, c));
+                    pos++;
+                    continue;
                 default:
-                    if (i + 3 < expr.length &&
-                            expr[i] == 'c' && expr[i + 1] == 'o' && expr[i + 2] == 's' && expr[i + 3] == '(') {
-                        lexemes.add(new Lexeme(LexemeType.COS, "cos("));
-                        i += 4;
-                        countOperation++;
-                    } else if (i + 3 < expr.length &&
-                            expr[i] == 's' && expr[i + 1] == 'i' && expr[i + 2] == 'n' && expr[i + 3] == '(') {
-                        lexemes.add(new Lexeme(LexemeType.SIN, "sin("));
-                        i += 4;
-                        countOperation++;
-                    } else if (i + 3 < expr.length &&
-                            expr[i] == 't' && expr[i + 1] == 'a' && expr[i + 2] == 'n' && expr[i + 3] == '(') {
-                        lexemes.add(new Lexeme(LexemeType.TAN, "tan("));
-                        i += 4;
-                        countOperation++;
-                    } else
-                        throw new RuntimeException("Unexpected character: " + expr[i] + " at position " + i);
-                    break;
+                    if ((c <= '9' && c >= '0') || c == '.') {
+                        StringBuilder sb = new StringBuilder();
+                        int countDot = 0;
+                        do {
+                            if (c == '.') {
+                                countDot++;
+                                if (countDot>1) {
+                                    throw new IllegalStateException("count dots is "+countDot);
+                                }
+                            }
+                            sb.append(c);
+                            pos++;
+                            if (pos >= expression.length()) {
+                                break;
+                            }
+                            c = expression.charAt(pos);
+                        } while ((c <= '9' && c >= '0') || c == '.');
+                        lexemes.add(new Lexeme(LexemeType.NUMBER, sb.toString()));
+                    }else{
+                        if (c != ' ') {
+                            System.out.println("so");
+                            break;
+                        }
+                        pos++;
+                    }
             }
         }
-        if (lexemes.size() == 0)                                                 // если выражение пустое
-            lexemes.add(new Lexeme(LexemeType.NUMBER, 0.0));                  // оно равно нулю
         lexemes.add(new Lexeme(LexemeType.EOF, ""));
-
-        return countOperation;
+        return lexemes;
     }
     // Грамматика:
     // expression : add_sub EOF
@@ -180,12 +147,16 @@ public class ParseFunctions {
     // mul_div : pow ( ( '*' | '/' ) pow )*
     // pow : primary ( '^' primary )*
     // primary : NUM | '-' pow | ( '(' | 'cos(' | 'sin(' | 'tan(' ) add_sub ')'
-    public static double expression(LexemeBuffer tokenList) {
-        double value = add_sub(tokenList);
-        Lexeme token = tokenList.next();
-        if (token.lexemeType != LexemeType.EOF)
-            throw new RuntimeException("Unexpected token: " + token.title + " at position " + tokenList.getPos());
-        return value;
+
+    public static double expr(LexemeBuffer lexemes) {
+        Lexeme lexeme = lexemes.next();
+
+        if (lexeme.lexemeType == LexemeType.EOF){
+            return 0;
+        } else {
+            lexemes.back();
+            return add_sub(lexemes);
+        }
     }
 
     public static double add_sub(LexemeBuffer tokenList) {
@@ -230,6 +201,7 @@ public class ParseFunctions {
             Lexeme token = tokenList.next();
             switch (token.lexemeType) {
                 case OP_POW:
+                    System.out.println("pow "+value+" "+ primary(tokenList));
                     value = Math.pow(value, primary(tokenList));
                     break;
                 default:
@@ -239,30 +211,22 @@ public class ParseFunctions {
         }
     }
 
-    public static double primary(LexemeBuffer tokenList) {
-        Lexeme token = tokenList.next();
-        switch (token.lexemeType) {
+    public static double primary(LexemeBuffer lexemes) {
+        Lexeme lexeme = lexemes.next();
+        switch (lexeme.lexemeType) {
             case NUMBER:
-                return token.value;
-            case OP_MINUS:
-                return - pow(tokenList);
+                return Double.parseDouble(lexeme.value);
             case LEFT_BRACKET:
-            case COS: case SIN: case TAN:
-                double value = 0.0;
-                if (token.lexemeType == LexemeType.LEFT_BRACKET)
-                    value = add_sub(tokenList);
-                else if (token.lexemeType == LexemeType.COS)
-                    value = Math.cos(Math.toRadians(add_sub(tokenList)));
-                else if (token.lexemeType == LexemeType.SIN)
-                    value = Math.sin(Math.toRadians(add_sub(tokenList)));
-                else if (token.lexemeType == LexemeType.TAN)
-                    value = Math.tan(Math.toRadians(add_sub(tokenList)));
-                token = tokenList.next();
-                if (token.lexemeType != LexemeType.RIGHT_BRACKET)
-                    throw new RuntimeException("Unexpected token: " + token.title + " at position " + tokenList.getPos());
+                double value = expr(lexemes);
+                lexeme = lexemes.next();
+                if (lexeme.lexemeType != LexemeType.LEFT_BRACKET) {
+                    throw new IllegalStateException("expected ( " + lexeme.value
+                            + " position " + lexemes.getPos());
+                }
                 return value;
             default:
-                throw new RuntimeException("Unexpected token: " + token.title + " at position " + tokenList.getPos());
+                    throw new IllegalStateException("expected ( " + lexeme.value
+                            + " position " + lexemes.getPos());
         }
     }
 

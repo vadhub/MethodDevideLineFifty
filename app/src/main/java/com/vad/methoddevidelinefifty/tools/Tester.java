@@ -10,10 +10,10 @@ public class Tester {
         String expression = "x^2 - 2*x -1";
         DividingLineHalf dividingLineHalf = new DividingLineHalf();
 
-        System.out.println(getFraction(dividingLineHalf.divideOfLineHalf(-1, 2, 0.5f, expression), 0.01));
+        //System.out.println(getFraction(dividingLineHalf.divideOfLineHalf(-1, 2, 0.5f, expression), 0.01));
 //        expression = expression.replace("x", newChar+"");
         ParseFunctions parseFunctions = new ParseFunctions();
-        System.out.println(parseFunctions.recurse("0.875^2 - 0.875*2 -1"));
+        System.out.println(parseFunctions.recurse("0.875^2") +" "+0.875*0.875);
 
 //        Tester tester = new Tester();
 //        try {
