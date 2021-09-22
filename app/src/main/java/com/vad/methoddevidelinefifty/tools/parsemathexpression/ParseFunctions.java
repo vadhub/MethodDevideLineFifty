@@ -89,7 +89,7 @@ public class ParseFunctions {
     //
     // unary : '-' factor
 
-    // func : NAME '(' expr (,expr)+ ')'
+    // func : NAME '(' (expr (,expr)+)? ')'
 
     private static double expr(LexemeBuffer lexemes) {
         Lexeme lexeme = lexemes.next();
