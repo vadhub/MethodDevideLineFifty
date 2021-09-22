@@ -19,7 +19,7 @@ public class DividingLineHalf {
         double l = bk - ak;
 
         String expres = expression.replace("x", xck+"");
-        double fFromXck = parseFunctions.recurse(expres);
+        double fFromXck = parseFunctions.parseExpression(expres);
 
         double yk = 0;
         double zk = 0;
@@ -32,13 +32,13 @@ public class DividingLineHalf {
             zk = bk - l/4;
 
             expres = expression.replace("x", yk+"");
-            fFromYk = parseFunctions.recurse(expres);
+            fFromYk = parseFunctions.parseExpression(expres);
 
             expres = expression.replace("x", zk+"");
-            fFromZk = parseFunctions.recurse(expres);
+            fFromZk = parseFunctions.parseExpression(expres);
 
             expres = expression.replace("x", xck+"");
-            fFromXck = parseFunctions.recurse(expres);
+            fFromXck = parseFunctions.parseExpression(expres);
 
             //step5
             if(fFromYk<fFromXck){
@@ -48,7 +48,7 @@ public class DividingLineHalf {
             } else {
                 //step 6
                 expres = expression.replace("x", xck+"");
-                fFromXck = parseFunctions.recurse(expres);
+                fFromXck = parseFunctions.parseExpression(expres);
                 if(fFromZk<fFromXck){
                     ak = xck;
                     xck = zk;

@@ -11,6 +11,6 @@ public class PresenterMain {
     }
 
     public void calculateFunction(String expression){
-        view.showResult(parseFunctions.getFraction(parseFunctions.recurse(expression), 0.01)+"");
+        //view.showResult(parseFunctions.getFraction(parseFunctions.recurse(expression), 0.01)+"");
     }
 }
