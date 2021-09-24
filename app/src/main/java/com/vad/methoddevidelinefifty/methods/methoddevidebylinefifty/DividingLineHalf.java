@@ -6,25 +6,26 @@ public class DividingLineHalf {
 
     private final ParseFunctions parseFunctions = new ParseFunctions();
 
-    public double divideOfLineHalf(double a, double b, double eps, String expression){
+    public float divideOfLineHalf(float a, float b, float eps, String expression){
+
         //step 1
-        double ak = a;
-        double bk = b;
+        float ak = a;
+        float bk = b;
 
         //step 2
         int k = 0;
 
         //step 3
-        double xck = (ak + bk)/2;
-        double l = bk - ak;
+        float xck = (ak + bk)/2;
+        float l = bk - ak;
 
         String expres = expression.replace("x", xck+"");
-        double fFromXck = parseFunctions.parseExpression(expres);
+        float fFromXck = parseFunctions.parseExpression(expres);
 
-        double yk = 0;
-        double zk = 0;
-        double fFromZk = 0;
-        double fFromYk = 0;
+        float yk = 0;
+        float zk = 0;
+        float fFromZk = 0;
+        float fFromYk = 0;
 
         while(true){
             //step4
@@ -34,11 +35,17 @@ public class DividingLineHalf {
             expres = expression.replace("x", yk+"");
             fFromYk = parseFunctions.parseExpression(expres);
 
+            System.out.println(fFromYk);
+
             expres = expression.replace("x", zk+"");
             fFromZk = parseFunctions.parseExpression(expres);
 
+            System.out.println(fFromZk);
+
             expres = expression.replace("x", xck+"");
             fFromXck = parseFunctions.parseExpression(expres);
+
+            System.out.println(fFromXck);
 
             //step5
             if(fFromYk<fFromXck){
