@@ -35,17 +35,11 @@ public class DividingLineHalf {
             expres = expression.replace("x", yk+"");
             fFromYk = parseFunctions.parseExpression(expres);
 
-            System.out.println(fFromYk);
-
             expres = expression.replace("x", zk+"");
             fFromZk = parseFunctions.parseExpression(expres);
 
-            System.out.println(fFromZk);
-
             expres = expression.replace("x", xck+"");
             fFromXck = parseFunctions.parseExpression(expres);
-
-            System.out.println(fFromXck);
 
             //step5
             if(fFromYk<fFromXck){

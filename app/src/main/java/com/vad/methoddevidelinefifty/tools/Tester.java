@@ -7,14 +7,15 @@ import java.util.HashMap;
 
 public class Tester {
     public static void main(String[] args) {
-        String expression = "x^2 - 2*x -1";
+        String expression = "pow(x,2) - 2*x -1";
         DividingLineHalf dividingLineHalf = new DividingLineHalf();
 
         System.out.println(getFraction(dividingLineHalf.divideOfLineHalf(-1, 2, 0.5f, expression), 0.01));
 
 //        expression = expression.replace("x", newChar+"");
         //ParseFunctions parseFunctions = new ParseFunctions();
-        //System.out.println(parseFunctions.getFraction(parseFunctions.parseExpression("pow(0.875, 2)"), 0.01) +" "+0.875*0.875);
+        //expression = expression.replace("x", "0.875");
+        //System.out.println(parseFunctions.getFraction(parseFunctions.parseExpression(expression), 0.01));
 
 
 //        Tester tester = new Tester();
