@@ -2,11 +2,16 @@ package com.vad.methoddevidelinefifty.methods.methoddevidebylinefifty;
 
 import com.vad.methoddevidelinefifty.tools.parsemathexpression.ParseFunctions;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DividingLineHalf {
 
     private final ParseFunctions parseFunctions = new ParseFunctions();
 
-    public float divideOfLineHalf(float a, float b, float eps, String expression){
+    public List<DividingResult> divideOfLineHalf(float a, float b, float eps, String expression){
+
+        List<DividingResult> dividingResults = new ArrayList<>();
 
         //step 1
         float ak = a;
@@ -59,10 +64,12 @@ public class DividingLineHalf {
                 }
             }
 
+            dividingResults.add(new DividingResult(ak, bk, k, xck, l, fFromXck, fFromZk, fFromYk, yk, zk));
             //step 7
             l = bk  - ak;
             if(l<eps){
-                return xck;
+                dividingResults.add(new DividingResult(ak, bk, k, xck, l, fFromXck, fFromZk, fFromYk, yk, zk));
+                return dividingResults;
             }else{
                 k++;
             }

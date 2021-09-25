@@ -1,6 +1,7 @@
 package com.vad.methoddevidelinefifty.tools;
 
 import com.vad.methoddevidelinefifty.methods.methoddevidebylinefifty.DividingLineHalf;
+import com.vad.methoddevidelinefifty.methods.methoddevidebylinefifty.DividingResult;
 import com.vad.methoddevidelinefifty.tools.parsemathexpression.ParseFunctions;
 
 import java.util.HashMap;
@@ -9,11 +10,24 @@ public class Tester {
     public static void main(String[] args) {
         String expression = "pow(x,2) - 2*x -1";
         DividingLineHalf dividingLineHalf = new DividingLineHalf();
+        ParseFunctions parseFunctions = new ParseFunctions();
 
-        System.out.println(getFraction(dividingLineHalf.divideOfLineHalf(-1, 2, 0.5f, expression), 0.01));
+        //System.out.println(dividingLineHalf.divideOfLineHalf(-1, 2, 0.5f, expression));
+
+        for (DividingResult r : dividingLineHalf.divideOfLineHalf(-1, 2, 0.5f, expression)) {
+            System.out.println(
+                    "k: " + r.getK() + "; a: " + r.getAk()
+                    + "; b: " + r.getBk()
+                    + "; xck: " + r.getXck()
+                    + "; yk: " + r.getYk()
+                    + "; zk: " + parseFunctions.getFraction(r.getZk(), 0.01)
+                    + "; l: " + r.getL()
+                    + "; f(xck): " + r.getfFromXck()
+                    + "; f(yk): " + r.getfFromYk()
+                    + "; f(zk): " + r.getfFromZk());
+        }
 
 //        expression = expression.replace("x", newChar+"");
-        //ParseFunctions parseFunctions = new ParseFunctions();
         //expression = expression.replace("x", "0.875");
         //System.out.println(parseFunctions.getFraction(parseFunctions.parseExpression(expression), 0.01));
 
