@@ -1,7 +1,10 @@
 package com.vad.methoddevidelinefifty.screens.main;
 
 import com.vad.methoddevidelinefifty.methods.methoddevidebylinefifty.DividingLineHalf;
+import com.vad.methoddevidelinefifty.methods.methoddevidebylinefifty.DividingResult;
 import com.vad.methoddevidelinefifty.tools.parsemathexpression.ParseFunctions;
+
+import java.util.List;
 
 public class PresenterMain {
 
@@ -12,7 +15,41 @@ public class PresenterMain {
         this.view = view;
     }
 
-    public void calculateFunction(String expression){
-        //view.showResult(parseFunctions.getFraction(parseFunctions.recurse(expression), 0.01)+"");
+    public void calculateFunction(float a, float b, float eps, String expression) {
+        List<DividingResult> dividingResult = dividingLineHalf.divideOfLineHalf(a, b ,eps, expression);
+
+        StringBuilder stringBuilder = new StringBuilder();
+        for (DividingResult r : dividingResult) {
+            stringBuilder
+                    .append("k = " + r.getK()).append('\n')
+                    .append("Xck = " + r.getfFromYk()).append('\n')
+                    .append("Yk = " + r.getYk()).append('\n')
+                    .append("Zk = " + r.getZk()).append('\n')
+                    .append("f(Xck) = " + r.getfFromXck()).append('\n')
+                    .append("f(Yk) = " + r.getfFromYk()).append('\n')
+                    .append("f(Zk) = " + r.getfFromZk()).append('\n')
+                    .append("l = " + r.getL()).append('\n');
+
+            if (r.getfFromYk()<r.getfFromXck()) {
+                stringBuilder
+                        .append("ak = " + r.getXck()).append('\n')
+                        .append("Xck = " + r.getYk()).append('\n');
+            } else {
+                if (r.getfFromZk()<r.getfFromXck()) {
+                    stringBuilder
+                            .append("ak = " + r.getXck()).append('\n')
+                            .append("Xck = " + r.getZk()).append('\n');
+                } else {
+                    stringBuilder
+                            .append("ak = " + r.getYk()).append('\n')
+                            .append("bk = " + r.getZk());
+                }
+            }
+        }
+
+        stringBuilder
+                .append("result = " + dividingResult.get(dividingResult.size()-1).getXck()).append('\n')
+                .append("result(fraction) = " + parseFunctions.getFraction(dividingResult.get(dividingResult.size()-1).getXck(), 0.01)).append('\n');
+        view.showResult(stringBuilder.toString());
     }
 }

@@ -46,11 +46,12 @@ public class DividingLineHalf {
             expres = expression.replace("x", xck+"");
             fFromXck = parseFunctions.parseExpression(expres);
 
+            dividingResults.add(new DividingResult(ak, bk, k, xck, l, fFromXck, fFromZk, fFromYk, yk, zk));
+
             //step5
             if(fFromYk<fFromXck){
                 bk = xck;
                 xck = yk;
-
             } else {
                 //step 6
                 expres = expression.replace("x", xck+"");
@@ -76,7 +77,4 @@ public class DividingLineHalf {
         }
 
     }
-
-
-
 }

@@ -35,7 +35,10 @@ public class MainActivity extends AppCompatActivity implements ViewMain{
 
     public void calculate(View view) {
         String expression = editTextFunction.getText().toString().trim().toLowerCase();
-        presenter.calculateFunction(expression);
+        float a = Float.parseFloat(editTextA.getText().toString());
+        float b = Float.parseFloat(editTextB.getText().toString());
+        float eps = Float.parseFloat(editTextEpsilon.getText().toString());
+        presenter.calculateFunction(a, b, eps, expression);
     }
 
 
