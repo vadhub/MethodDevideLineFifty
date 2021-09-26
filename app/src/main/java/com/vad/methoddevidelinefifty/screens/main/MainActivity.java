@@ -24,13 +24,11 @@ public class MainActivity extends AppCompatActivity implements ViewMain{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         presenter = new PresenterMain(this);
-
         editTextFunction = (EditText) findViewById(R.id.editTextFunction);
         editTextA = (EditText) findViewById(R.id.editTextNumberA);
         editTextB = (EditText) findViewById(R.id.editTextNumberB);
         editTextEpsilon = (EditText) findViewById(R.id.editTextNumberEpsilon);
         textViewResult = (TextView) findViewById(R.id.textViewResult);
-
     }
 
     public void calculate(View view) {

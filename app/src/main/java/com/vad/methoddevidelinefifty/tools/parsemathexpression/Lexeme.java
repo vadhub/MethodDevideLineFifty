@@ -14,7 +14,6 @@ public class Lexeme {
         this.value = value;
     }
 
-
     @Override
     public String toString() {
         return "Lexeme{" +
