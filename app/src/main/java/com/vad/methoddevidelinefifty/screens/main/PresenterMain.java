@@ -21,45 +21,44 @@ public class PresenterMain {
         StringBuilder stringBuilder = new StringBuilder();
         for (DividingResult r : dividingResult) {
             stringBuilder
-                    .append("k = " + r.getK()).append('\n')
-                    .append("Xck = " + r.getfFromYk()).append('\n')
-                    .append("Yk = " + r.getYk()).append('\n')
-                    .append("Zk = " + r.getZk()).append('\n')
-                    .append("f(Xck) = " + r.getfFromXck()).append('\n')
-                    .append("f(Yk) = " + r.getfFromYk()).append('\n')
-                    .append("f(Zk) = " + r.getfFromZk()).append('\n')
-                    .append("l = " + r.getL()).append('\n');
-
+                    .append("k = ").append(r.getK()).append('\n')
+                    .append("Xck = ").append(r.getfFromYk()).append('\n')
+                    .append("Yk = ").append(r.getYk()).append('\n')
+                    .append("Zk = ").append(r.getZk()).append('\n')
+                    .append("f(Xck) = ").append(r.getfFromXck()).append('\n')
+                    .append("f(Yk) = ").append(r.getfFromYk()).append('\n')
+                    .append("f(Zk) = ").append(r.getfFromZk()).append('\n')
+                    .append("L = ").append(r.getL()).append('\n');
             if (r.getfFromYk()<r.getfFromXck()) {
                 stringBuilder
-                        .append(r.getfFromYk() + "<" + r.getfFromXck()).append('\n')
-                        .append("ak = " + r.getXck()).append('\n')
-                        .append("Xck = " + r.getYk()).append('\n');
+                        .append(r.getfFromYk()).append("<").append(r.getfFromXck()).append('\n')
+                        .append("ak = ").append(r.getXck()).append('\n')
+                        .append("Xck = ").append(r.getYk()).append('\n');
             } else {
                 if (r.getfFromZk()<r.getfFromXck()) {
                     stringBuilder
-                            .append(r.getfFromYk() + ">" + r.getfFromXck()).append('\n')
-                            .append(r.getfFromZk() + "<" + r.getfFromXck()).append('\n')
-                            .append("ak = " + r.getXck()).append('\n')
-                            .append("Xck = " + r.getZk()).append('\n');
+                            .append(r.getfFromYk()).append(">").append(r.getfFromXck()).append('\n')
+                            .append(r.getfFromZk()).append("<").append(r.getfFromXck()).append('\n')
+                            .append("ak = ").append(r.getXck()).append('\n')
+                            .append("Xck = ").append(r.getZk()).append('\n');
                 } else {
                     stringBuilder
-                            .append(r.getfFromYk() + ">" + r.getfFromXck()).append('\n')
-                            .append(r.getfFromZk() + ">" + r.getfFromXck()).append('\n')
-                            .append("ak = " + r.getYk()).append('\n')
-                            .append("bk = " + r.getZk());
+                            .append(r.getfFromYk()).append(">").append(r.getfFromXck()).append('\n')
+                            .append(r.getfFromZk()).append(">").append(r.getfFromXck()).append('\n')
+                            .append("ak = ").append(r.getYk()).append('\n')
+                            .append("bk = ").append(r.getZk());
                 }
             }
             if (r.getL() > eps) {
-                stringBuilder.append(r.getL() + ">=" + eps).append('\n').append("k = k + 1").append('\n');
+                stringBuilder.append(r.getL()).append(">=").append(eps).append('\n').append("k = k + 1").append('\n');
             }
             stringBuilder.append('\n');
         }
 
         stringBuilder
-                .append(dividingResult.get(dividingResult.size()-1).getL() + "<" + eps)
-                .append("result = " + dividingResult.get(dividingResult.size()-1).getXck()).append('\n')
-                .append("result(fraction) = " + parseFunctions.getFraction(dividingResult.get(dividingResult.size()-1).getXck(), 0.01)).append('\n');
+                .append(dividingResult.get(dividingResult.size()-1).getL()).append("<").append(eps)
+                .append("result = ").append(dividingResult.get(dividingResult.size()-1).getXck()).append('\n')
+                .append("result(fraction) = ").append(parseFunctions.getFraction(dividingResult.get(dividingResult.size()-1).getXck(), 0.01)).append('\n');
         view.showResult(stringBuilder.toString());
     }
 }
