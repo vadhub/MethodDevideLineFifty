@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.vad.methoddevidelinefifty.R;
 import com.vad.methoddevidelinefifty.tools.parsemathexpression.ParseFunctions;
@@ -43,5 +44,10 @@ public class MainActivity extends AppCompatActivity implements ViewMain{
     @Override
     public void showResult(String calculation) {
         textViewResult.setText(calculation);
+    }
+
+    @Override
+    public void showError(String strErr) {
+        Toast.makeText(this, strErr, Toast.LENGTH_SHORT).show();
     }
 }
