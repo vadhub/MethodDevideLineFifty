@@ -24,8 +24,8 @@ public class DividingLineHalf {
         float xck = (ak + bk)/2;
         float l = bk - ak;
 
-        String expres = expression.replace("x", xck+"");
-        float fFromXck = parseFunctions.parseExpression(expres);
+        String expres = "";
+        float fFromXck = 0;
 
         float yk = 0;
         float zk = 0;

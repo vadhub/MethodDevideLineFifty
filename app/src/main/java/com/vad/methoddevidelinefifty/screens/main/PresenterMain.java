@@ -17,15 +17,27 @@ public class PresenterMain {
 
     public void calculateFunction(float a, float b, float eps, String expression) {
         List<DividingResult> dividingResult = dividingLineHalf.divideOfLineHalf(a, b ,eps, expression);
-
         StringBuilder stringBuilder = new StringBuilder();
+
+        // xck = (a + b)/2
+        //
+        //l = b - a
+        stringBuilder.append("step 1").append('\n');
+        stringBuilder.append("a = ").append(a).append('\n')
+                .append("b = ").append(a).append('\n')
+                .append("eps = ").append(eps).append('\n');
+        stringBuilder.append("step 2").append('\n');
+        stringBuilder.append("k = ").append(0).append('\n');
+        stringBuilder.append("step 3").append('\n');
+        stringBuilder.append("Xck = ( ").append(a).append(" + ").append(b).append(" )").append('\n');
+        stringBuilder.append("L = ").append(b).append(" - ").append(a).append('\n');
         for (DividingResult r : dividingResult) {
             stringBuilder
                     .append("k = ").append(r.getK()).append('\n')
                     .append("Xck = ").append(r.getfFromYk()).append('\n')
                     .append("Yk = ").append(r.getYk()).append('\n')
                     .append("Zk = ").append(r.getZk()).append('\n')
-                    .append("f(Xck) = ").append(r.getfFromXck()).append('\n')
+                    .append("f(Xck) = ").append(r.getfFromXck()).append("").append('\n')
                     .append("f(Yk) = ").append(r.getfFromYk()).append('\n')
                     .append("f(Zk) = ").append(r.getfFromZk()).append('\n')
                     .append("L = ").append(r.getL()).append('\n');
