@@ -128,6 +128,13 @@ public class ParseFunctions {
             return (float) Math.tan(Math.toRadians(args.get(0)));
         });
 
+        functionHashMap.put("ln", args -> {
+            if (args.size() != 1) {
+                throw new IllegalStateException("Min arguments not is 1" + args.size());
+            }
+            return (float) Math.log10(args.get(0));
+        });
+
 
 
         return functionHashMap;
