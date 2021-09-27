@@ -64,8 +64,6 @@ public class DividingLineHalf {
                     bk = zk;
                 }
             }
-
-            dividingResults.add(new DividingResult(ak, bk, k, xck, l, fFromXck, fFromZk, fFromYk, yk, zk));
             //step 7
             l = bk  - ak;
             if(l<eps){
@@ -74,6 +72,8 @@ public class DividingLineHalf {
             }else{
                 k++;
             }
+
+            dividingResults.add(new DividingResult(ak, bk, k, xck, l, fFromXck, fFromZk, fFromYk, yk, zk));
         }
 
     }

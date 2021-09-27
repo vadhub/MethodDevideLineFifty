@@ -128,6 +128,8 @@ public class ParseFunctions {
             return (float) Math.tan(Math.toRadians(args.get(0)));
         });
 
+
+
         return functionHashMap;
     }
 

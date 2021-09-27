@@ -15,12 +15,15 @@ public class PresenterMain {
         this.view = view;
     }
 
-    public void calculateFunction(float a, float b, float eps, String expression) {
+    public void calculateFunction(String a, String b, String eps, String expression) {
 
-        if (expression.equals("")) {
+        if (expression.equals("")&&a.equals("")&&b.equals("")&&eps.equals("")) {
             view.showError("Enter expression");
         } else {
-            view.showResult(viewResultCalculate(a, b, eps, expression));
+            float ak = Float.parseFloat(a);
+            float bk = Float.parseFloat(b);
+            float epsilon = Float.parseFloat(eps);
+            view.showResult(viewResultCalculate(ak, bk, epsilon, expression));
         }
     }
 
